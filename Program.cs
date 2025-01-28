@@ -1,47 +1,32 @@
+using CineAPI.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar el puerto
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5001);
-});
+// Obtener la cadena de conexión desde el archivo de configuración
+var connectionString = builder.Configuration.GetConnectionString("CineDB");
 
-// Agregar servicios al contenedor
-builder.Services.AddControllers(); // Los controladores se registran automáticamente
-builder.Services.AddScoped<TicketsController>();
-builder.Services.AddScoped<SalasController>();
+// Registrar los repositorios con la cadena de conexión
+builder.Services.AddScoped<IPeliculaRepository>(provider =>
+    new PeliculaRepository(connectionString));  
 
-// Configurar autorización
-builder.Services.AddAuthorization();
+// Registrar los servicios
+builder.Services.AddScoped<IPeliculaService, PeliculaService>();
 
-// Habilitar Swagger para la documentación
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configurar CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader());
-});
-
 var app = builder.Build();
 
-// Configurar el pipeline HTTP
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+// Configurar Swagger en desarrollo
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Habilitar CORS
-app.UseCors("AllowAll");
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

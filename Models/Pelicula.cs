@@ -13,8 +13,7 @@ public class Pelicula
 
     public Pelicula() {} //parameterless constructor
 
-    public Pelicula(string title, string descripcion, string director, string actores, 
-                   string genero, string clasificacion, int duracion)
+    public Pelicula(string title, string descripcion, string director, string actores, string genero, string clasificacion, int duracion)
     {
         Title = title;
         Descripcion = descripcion;
