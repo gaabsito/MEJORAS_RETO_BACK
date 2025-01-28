@@ -1,6 +1,6 @@
 using CineAPI.Repository;
 
-namespace CineAPI.Services
+namespace CineAPI.Service
 {
     public class PeliculaService : IPeliculaService
     {

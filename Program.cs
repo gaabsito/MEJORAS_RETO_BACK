@@ -1,4 +1,5 @@
 using CineAPI.Repository;
+using CineAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 

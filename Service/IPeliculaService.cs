@@ -1,4 +1,4 @@
-namespace CineAPI.Services
+namespace CineAPI.Service
 {
     public interface IPeliculaService
     {
