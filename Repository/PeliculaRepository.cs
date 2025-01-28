@@ -19,7 +19,7 @@ namespace CineAPI.Repository
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT PeliculaId, Title, Description, Director, Actores, Genero, Clasificacion, Duration, ImageUrl, CartelUrl FROM Peliculas";
+                string query = "SELECT PeliculaId, Title, Descripcion, Director, Actores, Genero, Clasificacion, Duracion, ImageUrl, CartelUrl FROM Peliculas";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -56,7 +56,7 @@ namespace CineAPI.Repository
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT PeliculaId, Title, Description, Director, Actores, Genero, Clasificacion, Duration, ImageUrl, CartelUrl FROM Peliculas WHERE PeliculaId = @PeliculaId";
+                string query = "SELECT PeliculaId, Title, Descripcion, Director, Actores, Genero, Clasificacion, Duracion, ImageUrl, CartelUrl FROM Peliculas WHERE PeliculaId = @PeliculaId";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@PeliculaId", peliculaId);
@@ -93,7 +93,7 @@ namespace CineAPI.Repository
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT PeliculaId, Title, Description, Director, Actores, Genero, Clasificacion, Duration, ImageUrl, CartelUrl FROM Peliculas WHERE Title LIKE @Title";
+                string query = "SELECT PeliculaId, Title, Descripcion, Director, Actores, Genero, Clasificacion, Duracion, ImageUrl, CartelUrl FROM Peliculas WHERE Title LIKE @Title";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Title", $"%{title}%");
@@ -132,7 +132,7 @@ namespace CineAPI.Repository
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT PeliculaId, Title, Description, Director, Actores, Genero, Clasificacion, Duration, ImageUrl, CartelUrl FROM Peliculas WHERE Genero LIKE @Genero";
+                string query = "SELECT PeliculaId, Title, Descripcion, Director, Actores, Genero, Clasificacion, Duracion, ImageUrl, CartelUrl FROM Peliculas WHERE Genero LIKE @Genero";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Genero", $"%{genero}%");
@@ -170,30 +170,30 @@ namespace CineAPI.Repository
                 await connection.OpenAsync();
 
                 var query = @"
-                    INSERT INTO Peliculas (Title, Description, Director, Actores, Genero, Clasificacion, Duration)
+                    INSERT INTO Peliculas (Title, Descripcion, Director, Actores, Genero, Clasificacion, Duracion)
                     VALUES 
-                    (@Title1, @Description1, @Director1, @Actores1, @Genero1, @Clasificacion1, @Duration1),
-                    (@Title2, @Description2, @Director2, @Actores2, @Genero2, @Clasificacion2, @Duration2)";
+                    (@Title1, @Descripcion1, @Director1, @Actores1, @Genero1, @Clasificacion1, @Duracion1),
+                    (@Title2, @Descripcion2, @Director2, @Actores2, @Genero2, @Clasificacion2, @Duracion2)";
 
                 using (var command = new SqlCommand(query, connection))
                 {
                     // Primera película
                     command.Parameters.AddWithValue("@Title1", "Inception");
-                    command.Parameters.AddWithValue("@Description1", "Un ladrón que roba secretos corporativos a través del uso de la tecnología para compartir sueños.");
+                    command.Parameters.AddWithValue("@Descripcion1", "Un ladrón que roba secretos corporativos a través del uso de la tecnología para compartir sueños.");
                     command.Parameters.AddWithValue("@Director1", "Christopher Nolan");
                     command.Parameters.AddWithValue("@Actores1", "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page");
                     command.Parameters.AddWithValue("@Genero1", "Ciencia ficción");
                     command.Parameters.AddWithValue("@Clasificacion1", "PG-13");
-                    command.Parameters.AddWithValue("@Duration1", 148);
+                    command.Parameters.AddWithValue("@Duracion1", 148);
 
                     // Segunda película
                     command.Parameters.AddWithValue("@Title2", "The Dark Knight");
-                    command.Parameters.AddWithValue("@Description2", "Batman se enfrenta al Joker en una batalla por el alma de Ciudad Gótica.");
+                    command.Parameters.AddWithValue("@Descripcion2", "Batman se enfrenta al Joker en una batalla por el alma de Ciudad Gótica.");
                     command.Parameters.AddWithValue("@Director2", "Christopher Nolan");
                     command.Parameters.AddWithValue("@Actores2", "Christian Bale, Heath Ledger, Aaron Eckhart");
                     command.Parameters.AddWithValue("@Genero2", "Acción");
                     command.Parameters.AddWithValue("@Clasificacion2", "PG-13");
-                    command.Parameters.AddWithValue("@Duration2", 152);
+                    command.Parameters.AddWithValue("@Duracion2", 152);
 
                     await command.ExecuteNonQueryAsync();
                 }

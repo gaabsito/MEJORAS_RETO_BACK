@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using CineAPI.Services;
+using CineAPI.Service;
 
 namespace CineAPI.Controllers
 {
