@@ -11,8 +11,8 @@ volumes:
 services:
     bbdd:
         container_name: dbContainer
-        image: mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
-        #image: mcr.microsoft.com/mssql/server:2019-CU30-ubuntu-20.04  PARA CASA CON NUESTRA VERSIÓN.
+        #image: mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
+        image: mcr.microsoft.com/mssql/server:2019-CU30-ubuntu-20.04  #PARA CASA CON NUESTRA VERSIÓN.
         ports:
             - 1433:1433 # Never change the internal port!!!
         networks:
